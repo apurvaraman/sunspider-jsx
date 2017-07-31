@@ -1,9 +1,0 @@
-#!/bin/sh -x
-
-for dir in tests/sun*; do
-  (cd $dir
-   for i in *.jsx; do
-       ${JSX:-"JSX"} --output $(basename $i jsx)js --release $i
-   done)
-
-done
