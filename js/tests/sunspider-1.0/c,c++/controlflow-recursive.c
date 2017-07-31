@@ -4,7 +4,7 @@ int ack(int m, int n){
    return (ack(m-1, ack(m,n-1)));
 }
 
-float fib(float n) {
+float fib(int n) {
     if (n < 2){ return 1; }
     return (fib(n-2) + fib(n-1));
 }
@@ -17,7 +17,7 @@ int tak(int x, int y, int z) {
 int main(){
     int i;
     // setting return values of functions and summing them added so that binaryen does not optimize away function calls
-    float a, b, c; 
+    int a, b, c; 
     for (i = 3; i <=5; i++){
         a += ack(3, i);
         b += fib(17.0+i);
