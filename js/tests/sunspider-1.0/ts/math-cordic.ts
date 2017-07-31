@@ -49,29 +49,29 @@ var Angles = [
 var Target: float = 28.027;
 
 function cordicsincos(Target: float): float {
-    var X: float;
-    var Y: float;
+    var X: int;
+    var Y: int;
     var TargetAngle: float;
     var CurrAngle: float;
-    var Step: float = 0;
+    var Step: int;
  
     X = FIXED(AG_CONST);         /* AG_CONST * cos(0) */
     Y = 0;                       /* AG_CONST * sin(0) */
 
     TargetAngle = FIXED(Target);
     CurrAngle = 0;
-    for (let Step2: int = 0; Step2 < 12; Step2++) {
+    for (Step = 0; Step < 12; Step++) {
         var NewX: float;
         if (TargetAngle > CurrAngle) {
             NewX = X - (Y >> Step);
             Y = (X >> Step) + Y;
             X = NewX;
-            CurrAngle += Angles[Step2];
+            CurrAngle += Angles[Step];
         } else {
             NewX = X + (Y >> Step);
             Y = -(X >> Step) + Y;
             X = NewX;
-            CurrAngle -= Angles[Step2];
+            CurrAngle -= Angles[Step];
         }
         Step++;
     }
@@ -83,13 +83,11 @@ function cordicsincos(Target: float): float {
 
 var total: float = 0;
 
-function cordic( runs: int ): float {
-
+export function main() {
+  let runs: int = 25000;
   for ( var i: int = 0 ; i < runs ; i++ ) {
       total += cordicsincos(Target);
   }
 
   return total;
 }
-
-cordic(25000);
