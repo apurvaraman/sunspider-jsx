@@ -1,9 +1,4 @@
-// The Computer Language Shootout
-// http://shootout.alioth.debian.org/
-// contributed by Isaac Gouy
-type double = number;
-
-function partial(n){
+function partial(n: double){
     let a1: double, a2, a3, a4, a5, a6, a7, a8, a9 = 0.0;
     let twothirds: double = 2.0/3.0;
     let alt: double = -1.0;
@@ -23,12 +18,15 @@ function partial(n){
         a9 += alt/(2*k -1);
     }
 }
-for (let i: double = 1024; i <= 16384; i *= 2) {
-    partial(i);
+
+export function main(){
+    for (let i: double = 1024; i <= 16384; i *= 2) {
+        partial(i);
+    }
 }
 
-function pow(val1: number, var2: number): number{
-    let ans: number = 1;
+function pow(val1: double, var2: double): double{
+    let ans: double = 1;
     while(var2 > 0){
         ans = ans * val1;
         var2--;
