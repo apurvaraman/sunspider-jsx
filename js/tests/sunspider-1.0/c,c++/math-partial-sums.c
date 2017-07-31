@@ -7,7 +7,7 @@ double partial(int n)
     double k,k2,k3 = 0.0;
     double sum = 0;
 
-    for (k=0; k<=n; k++)
+    for (k=1; k<=n; k++)
     {
         k2 = k*k;
         k3 = k2*k;
@@ -33,9 +33,9 @@ int main()
     double sum;
     for (i = 1024; i <= 16384; i *= 2) 
     {
-        sum += partial(i);
+        sum += partial(i)/i;
     }
-    return sum;
+    return (int) sum;
 }
 
 double pow(double a, double b)
