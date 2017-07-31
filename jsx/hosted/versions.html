@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+<html>
 <head>
 
 <meta charset=utf8>
 
 <!--
- Copyright (C) 2007 Apple Inc.  All rights reserved.
+ Copyright (C) 2007 Apple Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions
@@ -25,34 +26,30 @@
  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
  OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 -->
 
-<title>SunSpider @NAME@</title>
-<link rel="stylesheet" href="../sunspider.css">
+<title>SunSpider 1.0 JavaScript Benchmark</title>
+<link rel="stylesheet" href="sunspider.css">
 </head>
 
 <body>
-<h3>@NAME@</h3>
-<div id="console">
-</div>
-<script>
-function record(time) {
-    document.getElementById("console").innerHTML = time + "ms";
-    if (window.parent) {
-        parent.recordResult(time);
-    }
-}
 
-var _sunSpiderStartDate = new Date();
+<h2><span id="logo">&#x2600;</span>SunSpider 1.0 JavaScript Benchmark</h2>
 
-@SCRIPT@
-JSX.require("@NAME@.jsx")._Main.main$AS([]);
-var _sunSpiderInterval = new Date() - _sunSpiderStartDate;
+<p>This is SunSpider, a JavaScript benchmark. This benchmark tests the
+core JavaScript language only, not the DOM or other browser APIs. It
+is designed to compare different versions of the same browser, and
+different browsers to each other.</p>
 
-record(_sunSpiderInterval);
-</script>
+<p>This version of the harness is 1.0. This page lists all versions
+of the test content:</p>
 
+<ul>
+<li><a href="sunspider-0.9/driver.html">Version 0.9</a></li>
+<li><a href="sunspider-0.9.1/driver.html">Version 0.9.1</a></li>
+<li><a href="sunspider-1.0/driver.html">Version 1.0</a></li>
+</ul>
 
 </body>
-</html>
+<html>
