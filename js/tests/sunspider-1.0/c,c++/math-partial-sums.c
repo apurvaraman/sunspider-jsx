@@ -33,7 +33,7 @@ int main()
     double sum;
     for (i = 1024; i <= 16384; i *= 2) 
     {
-        sum += partial(i)/i;
+        sum += partial(i);
     }
     return (int) sum;
 }
