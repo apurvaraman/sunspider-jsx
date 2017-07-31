@@ -8,7 +8,7 @@ int nsieve(int m, int*isPrime){
 
    for (i=2; i<=m; i++){
       if (isPrime[i]) {
-         for (k=i+i; k<=m; k+=i) {isPrime[k] = 0};
+         for (k=i+i; k<=m; k+=i) {isPrime[k] = 0;};
          count++;
       }
    }
@@ -19,7 +19,7 @@ int main() {
     int i;
     int retVal;
     for (i = 1; i <= 3; i++ ) {
-        int m = (1<<i)*10000;
+        int m = (1<<2)*10000;
         int flags [m+1];
         retVal += nsieve(m, flags); // changed return value of main        
     }
