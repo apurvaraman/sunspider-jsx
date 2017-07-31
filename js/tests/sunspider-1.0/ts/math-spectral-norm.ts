@@ -1,45 +1,47 @@
-// The Great Computer Language Shootout
-// http://shootout.alioth.debian.org/
-//
-// contributed by Ian Osgood
-type int = number;
+// Edit here and press "Compile"
 
-
-function A(i: double,j: double): double {
-  return 1/((i+j)*(i+j+1)/2+i+1);
+function A(i: int,j: int): double {
+    let i2: double = i*1.0;
+    let j2: double = j*1.0;
+  return 1/((i2+j2)*(i2+j2+1)/2+i2+1);
 }
 
-function Au(u: double[],v: double[],n: int) {
+function Au(u: double[],v: double[],n: int): int {
   for (let i: int=0; i<n; ++i) {
-    let t: double = 0;
+    let t: double = 0.0;
     for (let j: int=0; j<n; ++j)
-      t += A(i*1.0,j*1.0) * u[j];
+      t += A(i,j) * u[j];
     v[i] = t;
   }
+  return 1;
 }
 
-function Atu(u: double[],v: double[],n: int) {
+function AtAu(u: double[],v: double[],n: int): int {
   for (let i: int=0; i<n; ++i) {
-    let t: double = 0;
+    let t: double = 0.0;
     for (let j: int=0; j<n; ++j)
-      t += A(j*1.0,i*1.0) * u[j];
+      t += A(j,i) * u[j];
     v[i] = t;
   }
+  return 1;
 }
 
-function AtAu(u: double[],v: double[],w: double[],n: int) {
-  Au(u,w,n);
-  Atu(w,v,n);
+export function main(): double {
+    let sum: double = 0;
+    for (let i: int = 6; i <= 48; i *= 2) {
+     sum = sum + spectralnorm(i);
+    }
+    return sum;
 }
 
 function spectralnorm(n: int) : double{
-   let i: int, u: double[] = new Array(n), v: double[]= new Array(n), w: double[]=new Array(n), vv: double=0, vBv:double=0;
+   let i: int, u: double[] = new Array(n), v: double[]= new Array(n), vv: double=0, vBv:double=0;
   for (i=0; i<n; ++i) {
-    u[i] = 1; v[i] = w[i] = 0;
+    u[i] = 1; v[i] = i;
   }
   for (i=0; i<10; ++i) {
-    AtAu(u,v,w,n);
-    AtAu(v,u,w,n);
+    Au(v,u,n);
+    AtAu(v,u,n);
   }
   for (i=0; i<n; ++i) {
     vBv += u[i]*v[i];
@@ -47,10 +49,3 @@ function spectralnorm(n: int) : double{
   }
   return sqrt(vBv/vv);
 }
-
-export function main() {
-    for (let i: int = 6; i <= 48; i *= 2) {
-     spectralnorm(i);
-    }
-}
-
