@@ -28,8 +28,15 @@ function tak(x: int,y: int,z: int): int {
     return tak(tak(x-1,y,z), tak(y-1,z,x), tak(z-1,x,y));
 }
 
-for ( var i: int = 3; i <= 5; i++ ) {
-    ack(3,i);
-    fib(17.0+i);
-    tak(3*i+3,2*i+2,i+1);
+export function main(): int {
+    let a: int = 0;
+    let b: int = 0;
+    let c: int = 0;
+    for (let i: int = 3; i <= 5; i++ ) {
+        a = a + ack(3,i);
+        b = b + fib(17+i);
+        c = c + tak(3*i+3,2*i+2,i+1);
+    }
+    return a + b + c;
 }
+
