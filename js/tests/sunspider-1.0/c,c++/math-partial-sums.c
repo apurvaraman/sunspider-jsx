@@ -1,10 +1,11 @@
 
-int partial(int n)
+double partial(int n)
 {
     double a1,a2,a3,a6,a7,a8,a9 = 0.0;
     double twothirds = 2.0/3.0;
     double alt = -1.0;
-    double k,k2,k3,sk,ck = 0.0;
+    double k,k2,k3 = 0.0;
+    double sum = 0;
 
     for (k=0; k<=n; k++)
     {
@@ -18,20 +19,26 @@ int partial(int n)
         a6 += 1.0/k;
         a7 += 1.0/k2;
         a8 += alt/k;
-        a9 += alt/(2*k -1);    
+        a9 += alt/(2*k -1);
     }
+    
+    sum = a1+a2+a3+a6+a7+a8+a9;
+    return sum;
+  
 }
 
 int main()
 {
     int i;
+    double sum;
     for (i = 1024; i <= 16384; i *= 2) 
     {
-        partial(i);
+        sum += partial(i);
     }
+    return sum;
 }
 
-double power(double a, double b)
+double pow(double a, double b)
 {
     double ans = 1.0;
     while(b>0)
