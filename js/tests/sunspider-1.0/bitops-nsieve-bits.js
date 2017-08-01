@@ -1,13 +1,3 @@
-// The Great Computer Language Shootout
-//  http://shootout.alioth.debian.org
-//
-//  Contributed by Ian Osgood
-
-function pad(n,width) {
-  var s = n.toString();
-  while (s.length < width) s = ' ' + s;
-  return s;
-}
 
 function primes(isPrime, n) {
   var i, count = 0, m = 10000<<n, size = m+31>>5;
