@@ -22,9 +22,10 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
-
-bitwiseAndValue = 4294967296;
-for (var i = 0; i < 600000; i++)
-    bitwiseAndValue = bitwiseAndValue & i;
-
-var result = bitwiseAndValue;
+export function main(): int {
+    var bitwiseAndValue: int = 429496729; //CHANGED THIS VALUE CAUSE IT WAS GIVING AN INT OVERFLOW SINCE IT WAS TOO BIG
+    for (var i: int = 0; i < 600000; i++){
+        bitwiseAndValue = bitwiseAndValue & i;
+    }
+    return bitwiseAndValue;
+}
