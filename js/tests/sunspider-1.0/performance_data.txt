@@ -1,5 +1,4 @@
-Math-spectral-sums
-
+Math-partial-sums
 JS           AS             C
 6556.63     6628.38     6581.89
 6919.5      7031.76     6923.51
