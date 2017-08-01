@@ -32,9 +32,9 @@ float FIXED(float X)
   return (X * 65536.0);
 }
 
-float FLOAT(int X)
+int FLOAT(int X)
 {
-  return (X / 65536.0);
+  return (X / 65536);
 }
 
 float DEG2RAD(float X)
@@ -42,12 +42,13 @@ float DEG2RAD(float X)
   return (0.017453 * (X));
 }
 
-const float Angles[12] = {(45.0* 65536.0),(26.565* 65536.0),(14.0362* 65536.0), (7.12502* 65536.0),
+
+float Angles[12] = {(45.0* 65536.0),(26.565* 65536.0),(14.0362* 65536.0), (7.12502* 65536.0),
   (3.57633* 65536.0), (1.78991* 65536.0), (0.895174* 65536.0), (0.447614* 65536.0), (0.223811* 65536.0), (0.111906* 65536.0), (0.055953* 65536.0),(0.027977* 65536.0) };
 
 float Target = 28.027;
 
-float cordicsincos(float Target) {
+int cordicsincos(float Target) {
     int X;
     int Y;
     float TargetAngle;
@@ -79,7 +80,7 @@ float cordicsincos(float Target) {
 
 ///// End CORDIC
 
-float total = 0;
+int total = 0;
 
 int main(){
     int i;
