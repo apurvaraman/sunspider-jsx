@@ -14,14 +14,14 @@ class Body {
     vy: double;
     vz: double;
     mass: double;
-    constructor(x: double, y: double, z: double, vx: double, vy: double, vz: double, mass: double) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.vx = vx;
-        this.vy = vy;
-        this.vz = vz;
-        this.mass = mass;
+    constructor(a: double, b: double, c: double, d: double, e: double, f: double, g: double) {
+        this.x = a;
+        this.y = b;
+        this.z = c;
+        this.vx = d;
+        this.vy = e;
+        this.vz = f;
+        this.mass = g;
     }
     offsetMomentum(px: double, py: double, pz: double): Body {
            this.vx = -px / SOLAR_MASS;
@@ -94,8 +94,8 @@ class NBodySystem {
         this.px = 0.0;
         this.py = 0.0;
         this.pz = 0.0;
-        this.size = this.bodies.length;
-        for (var i=0; i<size; i++){
+        this.size = 5;
+        for (let i: int=0; i < this.size; i++){
             let b: Body = this.bodies[i];
             let m: double = b.mass;
             this.px += b.vx * m;
@@ -110,7 +110,7 @@ class NBodySystem {
         let dz: double;
         let distance: double;
         let mag: double;
-        let size: double = this.bodies.length;
+        let size: double = this.size;
         for (let i: int =0; i<size; i++) {
             let bodyi: Body = this.bodies[i];
             for (let j: int =i+1; j<size; j++) {
@@ -138,63 +138,51 @@ class NBodySystem {
             body.z += dt * body.vz;
         }
     }
-    energy(): double {
-        let dx: double;
-        let dy: double;
-        let dz: double;
-        let distance: double;
-        let e: double = 0.0;
-        let size: double = this.bodies.length;
-        for (let i: int=0; i<size; i++) {
-            let bodyi: Body = this.bodies[i];
-
-            e = e + 0.5 * bodyi.mass * (bodyi.vx * bodyi.vx + bodyi.vy * bodyi.vy + bodyi.vz * bodyi.vz);
-
-            for (let j: int=i+1; j<size; j++) {
-                let bodyj: Body = this.bodies[j];
-                dx = bodyi.x - bodyj.x;
-                dy = bodyi.y - bodyj.y;
-                dz = bodyi.z - bodyj.z;
-
-                distance = sqrt(dx*dx + dy*dy + dz*dz);
-                e = e - (bodyi.mass * bodyj.mass) / distance;
-            }
-        }
-        return e;
-    }
 }
 
-export function main() {
-    var ret;
+function energy(bodies: NBodySystem): double {
+    let dx: double;
+    let dy: double;
+    let dz: double;
+    let distance: double;
+    let e: double = 0.0;
+    let size: double = 5;
+    for (let i: int=0; i<size; i++) {
+        let bodyi: Body = bodies.bodies[i];
 
-    for ( var n = 3; n <= 24; n *= 2 ) {
-        (function(){
-            var bodies = new NBodySystem( Array(
-                Sun(),Jupiter(),Saturn(),Uranus(),Neptune()
-            ));
-            var max = n * 100;
+        e = e + 0.5 * bodyi.mass * (bodyi.vx * bodyi.vx + bodyi.vy * bodyi.vy + bodyi.vz * bodyi.vz);
+
+        for (let j: int=i+1; j<size; j++) {
+            let bodyj: Body = bodies.bodies[j];
+            dx = bodyi.x - bodyj.x;
+            dy = bodyi.y - bodyj.y;
+            dz = bodyi.z - bodyj.z;
+
+            distance = sqrt(dx*dx + dy*dy + dz*dz);
+            e = e - (bodyi.mass * bodyj.mass) / distance;
+        }
+    }
+    return e;
+}
+
+export function main(): double {
+    var ret: double = 0;
+
+    for ( var n: int = 3; n <= 3; n *= 2 ) {
+            let bodiesArr: Body[] = new Array(5);
+            bodiesArr[0] = Sun();
+            bodiesArr[1] = Jupiter();
+            bodiesArr[2] = Saturn();
+            bodiesArr[3] = Uranus();
+            bodiesArr[4] = Neptune();
+            var bodies: NBodySystem = new NBodySystem(bodiesArr);
+            var max: int = n * 100;
             
-            ret = bodies.energy();
-            for (var i=0; i<max; i++){
+            ret = energy(bodies);
+            for (let i: int=0; i<max; i++){
                 bodies.advance(0.01);
             }
-            ret = bodies.energy();
-        })();
-    }   
-}
-var ret;
-
-for ( var n = 3; n <= 24; n *= 2 ) {
-    (function(){
-        var bodies = new NBodySystem( Array(
-           Sun(),Jupiter(),Saturn(),Uranus(),Neptune()
-        ));
-        var max = n * 100;
-        
-        ret = bodies.energy();
-        for (var i=0; i<max; i++){
-            bodies.advance(0.01);
-        }
-        ret = bodies.energy();
-    })();
+            ret = energy(bodies);
+    }
+    return ret;   
 }
