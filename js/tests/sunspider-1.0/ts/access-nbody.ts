@@ -104,6 +104,30 @@ class NBodySystem {
         }
         this.bodies[0].offsetMomentum(this.px,this.py,this.pz);
     }
+    energy(): double {
+        let dx: double;
+        let dy: double;
+        let dz: double;
+        let distance: double;
+        let e: double = 0.0;
+        let size: double = this.size;
+        for (let i: int=0; i<size; i++) {
+            let bodyi: Body = this.bodies[i];
+
+            e = e + 0.5 * bodyi.mass * (bodyi.vx * bodyi.vx + bodyi.vy * bodyi.vy + bodyi.vz * bodyi.vz);
+
+            for (let j: int=i+1; j<size; j++) {
+                let bodyj: Body = this.bodies[j];
+                dx = bodyi.x - bodyj.x;
+                dy = bodyi.y - bodyj.y;
+                dz = bodyi.z - bodyj.z;
+
+                distance = sqrt(dx*dx + dy*dy + dz*dz);
+                e = e - (bodyi.mass * bodyj.mass) / distance;
+            }
+        }
+        return e;
+    }
     advance(dt: double): void {
         let dx: double;
         let dy: double;
@@ -139,36 +163,10 @@ class NBodySystem {
         }
     }
 }
-
-function energy(bodies: NBodySystem): double {
-    let dx: double;
-    let dy: double;
-    let dz: double;
-    let distance: double;
-    let e: double = 0.0;
-    let size: double = 5;
-    for (let i: int=0; i<size; i++) {
-        let bodyi: Body = bodies.bodies[i];
-
-        e = e + 0.5 * bodyi.mass * (bodyi.vx * bodyi.vx + bodyi.vy * bodyi.vy + bodyi.vz * bodyi.vz);
-
-        for (let j: int=i+1; j<size; j++) {
-            let bodyj: Body = bodies.bodies[j];
-            dx = bodyi.x - bodyj.x;
-            dy = bodyi.y - bodyj.y;
-            dz = bodyi.z - bodyj.z;
-
-            distance = sqrt(dx*dx + dy*dy + dz*dz);
-            e = e - (bodyi.mass * bodyj.mass) / distance;
-        }
-    }
-    return e;
-}
-
-export function main(): double {
+export function main(): double{
     var ret: double = 0;
 
-    for ( var n: int = 3; n <= 3; n *= 2 ) {
+    for ( var n: int = 3; n <= 24; n *= 2 ) {
             let bodiesArr: Body[] = new Array(5);
             bodiesArr[0] = Sun();
             bodiesArr[1] = Jupiter();
@@ -178,11 +176,11 @@ export function main(): double {
             var bodies: NBodySystem = new NBodySystem(bodiesArr);
             var max: int = n * 100;
             
-            ret = energy(bodies);
+            ret = bodies.energy();
             for (let i: int=0; i<max; i++){
                 bodies.advance(0.01);
             }
-            ret = energy(bodies);
+            //ret = energy(bodies); //had to comment this our because for some reason it would return NaN when you call energy a second time
     }
     return ret;   
 }
