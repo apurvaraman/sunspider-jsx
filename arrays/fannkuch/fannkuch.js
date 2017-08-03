@@ -14,6 +14,7 @@
 // before the code. Then that object will be used in the code, and you
 // can continue to use Module afterwards as well.
 var Module;
+var exports2;
 if (!Module) Module = (typeof Module !== 'undefined' ? Module : null) || {};
 
 // Sometimes an existing Module object exists with properties
@@ -1822,6 +1823,7 @@ function integrateWasmJS(Module) {
     // performing other necessary setup
     function receiveInstance(instance) {
       exports = instance.exports;
+      exports2 = instance.exports;
       if (exports.memory) mergeMemory(exports.memory);
       Module['asm'] = exports;
       Module["usingWasm"] = true;

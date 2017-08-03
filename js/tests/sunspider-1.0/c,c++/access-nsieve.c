@@ -27,5 +27,5 @@ int main() {
         int flags [m + 1];
         sum += nsieve(m, flags); // changed return value of main        
     }
-    return sum; //returns 1860
+    return sum; //returns 263
 }

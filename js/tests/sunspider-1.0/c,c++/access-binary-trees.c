@@ -63,5 +63,5 @@ int main() {
 
         ret = itemCheck(longLivedTree);
     }
-    return ret;  // returns -32
+    return ret;  // returns 0, prob because structures are not working, there is an error about heap memory area. 
 }

@@ -1641,9 +1641,9 @@ function integrateWasmJS(Module) {
   var method = Module['wasmJSMethod'] || 'native-wasm';
   Module['wasmJSMethod'] = method;
 
-  var wasmTextFile = Module['wasmTextFile'] || 'binarytrees.wast';
-  var wasmBinaryFile = Module['wasmBinaryFile'] || 'binarytrees.wasm';
-  var asmjsCodeFile = Module['asmjsCodeFile'] || 'binarytrees.temp.asm.js';
+  var wasmTextFile = Module['wasmTextFile'] || 'snorm.wast';
+  var wasmBinaryFile = Module['wasmBinaryFile'] || 'snorm.wasm';
+  var asmjsCodeFile = Module['asmjsCodeFile'] || 'snorm.temp.asm.js';
 
   if (typeof Module['locateFile'] === 'function') {
     wasmTextFile = Module['locateFile'](wasmTextFile);
@@ -2045,7 +2045,7 @@ STATICTOP = STATIC_BASE + 3008;
 /* global initializers */  __ATINIT__.push();
 
 
-memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "binarytrees.html.mem" : null;
+memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "snorm.html.mem" : null;
 
 
 
@@ -2094,6 +2094,13 @@ function copyTempDouble(ptr) {
 // {{PRE_LIBRARY}}
 
 
+  function _llvm_stackrestore(p) {
+      var self = _llvm_stacksave;
+      var ret = self.LLVM_SAVEDSTACKS[p];
+      self.LLVM_SAVEDSTACKS.splice(p, 1);
+      Runtime.stackRestore(ret);
+    }
+
   
   function ___setErrNo(value) {
       if (Module['___errno_location']) HEAP32[((Module['___errno_location']())>>2)]=value;
@@ -2101,6 +2108,15 @@ function copyTempDouble(ptr) {
       return value;
     } 
   Module["_sbrk"] = _sbrk;
+
+  function _llvm_stacksave() {
+      var self = _llvm_stacksave;
+      if (!self.LLVM_SAVEDSTACKS) {
+        self.LLVM_SAVEDSTACKS = [];
+      }
+      self.LLVM_SAVEDSTACKS.push(Runtime.stackSave());
+      return self.LLVM_SAVEDSTACKS.length-1;
+    }
 
    
   Module["_memset"] = _memset;
@@ -2250,7 +2266,7 @@ function invoke_iiii(index,a1,a2,a3) {
 
 Module.asmGlobalArg = { "Math": Math, "Int8Array": Int8Array, "Int16Array": Int16Array, "Int32Array": Int32Array, "Uint8Array": Uint8Array, "Uint16Array": Uint16Array, "Uint32Array": Uint32Array, "Float32Array": Float32Array, "Float64Array": Float64Array, "NaN": NaN, "Infinity": Infinity };
 
-Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enlargeMemory, "getTotalMemory": getTotalMemory, "abortOnCannotGrowMemory": abortOnCannotGrowMemory, "abortStackOverflow": abortStackOverflow, "nullFunc_ii": nullFunc_ii, "nullFunc_iiii": nullFunc_iiii, "invoke_ii": invoke_ii, "invoke_iiii": invoke_iiii, "___lock": ___lock, "___syscall6": ___syscall6, "___setErrNo": ___setErrNo, "_abort": _abort, "___syscall140": ___syscall140, "_emscripten_memcpy_big": _emscripten_memcpy_big, "___syscall54": ___syscall54, "___unlock": ___unlock, "___syscall146": ___syscall146, "DYNAMICTOP_PTR": DYNAMICTOP_PTR, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX };
+Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enlargeMemory, "getTotalMemory": getTotalMemory, "abortOnCannotGrowMemory": abortOnCannotGrowMemory, "abortStackOverflow": abortStackOverflow, "nullFunc_ii": nullFunc_ii, "nullFunc_iiii": nullFunc_iiii, "invoke_ii": invoke_ii, "invoke_iiii": invoke_iiii, "___lock": ___lock, "_abort": _abort, "___setErrNo": ___setErrNo, "___syscall6": ___syscall6, "___syscall140": ___syscall140, "___syscall146": ___syscall146, "_emscripten_memcpy_big": _emscripten_memcpy_big, "___syscall54": ___syscall54, "___unlock": ___unlock, "_llvm_stackrestore": _llvm_stackrestore, "_llvm_stacksave": _llvm_stacksave, "DYNAMICTOP_PTR": DYNAMICTOP_PTR, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX };
 // EMSCRIPTEN_START_ASM
 var asm =Module["asm"]// EMSCRIPTEN_END_ASM
 (Module.asmGlobalArg, Module.asmLibraryArg, buffer);
