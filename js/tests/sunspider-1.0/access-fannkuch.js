@@ -15,12 +15,6 @@ function fannkuch(n) {
    var r = n;
 
    while (true) {
-      // write-out the first 30 permutations
-      if (check < 30){
-         var s = "";
-         for(var i=0; i<n; i++) s += (perm1[i]+1).toString();
-         check++;
-      }
 
       while (r != 1) { count[r - 1] = r; r--; }
       if (!(perm1[0] == 0 || perm1[m] == m)) {
@@ -60,7 +54,8 @@ function fannkuch(n) {
       }
    }
 }
-
-var n = 8;
+function main() {
+var n = 10;
 var ret = fannkuch(n);
+} // returns 38
 

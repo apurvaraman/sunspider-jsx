@@ -43,9 +43,13 @@ function spectralnorm(n) {
     vBv += u[i]*v[i];
     vv  += v[i]*v[i];
   }
-  return Math.sqrt(vBv/vv);
+  return Math.floor(Math.sqrt(vBv/vv));
 }
 
+function main() {
+  var sum = 0;
 for (var i = 6; i <= 48; i *= 2) {
-    spectralnorm(i);
+    sum +=spectralnorm(i);
+}
+return sum;
 }
