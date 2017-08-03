@@ -1,7 +1,7 @@
 /* The Great Computer Language Shootout
    http://shootout.alioth.debian.org/
    contributed by Isaac Gouy */
-
+#define NULL 0
 struct TreeNode
 {
    struct TreeNode *left;
@@ -9,28 +9,28 @@ struct TreeNode
    int item;
 };
 
-int itemCheck(struct TreeNode *node) {
-    if(node->left == NULL) {
-        return node->item;
+int itemCheck(struct TreeNode node) {
+    if(node.left == NULL) {
+        return node.item;
     }
     else {
-        return node->item + itemCheck(node->left) - itemCheck(node->right);
+        return node.item + itemCheck(*node.left) - itemCheck(*node.right);
     }
 }
 
 
-struct TreeNode * bottomUpTree(int item, int depth){
+struct TreeNode bottomUpTree(int item, int depth){
    if (depth>0){
       struct TreeNode node;
-      node.left = bottomUpTree(2*item-1, depth-1);
-      node.right =  bottomUpTree(2*item-1, depth-1);
+      *node.left = bottomUpTree(2*item-1, depth-1);
+      *node.right =  bottomUpTree(2*item-1, depth-1);
       node.item = item;
-      return *node;
+      return node;
    }
    else {
       struct TreeNode node2;
       node2.item = item;
-      return *node2;
+      return node2;
    }
 }
 
@@ -50,7 +50,7 @@ int main() {
         
         int check = itemCheck(bottomUpTree(0,stretchDepth));
         
-        struct TreeNode *longLivedTree = bottomUpTree(0,maxDepth);
+        struct TreeNode longLivedTree = bottomUpTree(0,maxDepth);
         for (int depth = minDepth; depth<=maxDepth; depth+=2){
             int iterations = 1 << (maxDepth - depth + minDepth);
 
@@ -61,7 +61,7 @@ int main() {
             }
         }
 
-        ret = itemCheck(*longLivedTree);
+        ret = itemCheck(longLivedTree);
     }
     return ret;  // returns -32
 }
