@@ -22,9 +22,11 @@ function primes(isPrime: int[], n: int): int {
 
 export function main(): int {
     let sum: int = 0;
+    let retVal: int = 0;
     for (let i: int = 4; i <= 4; i++) {
         let isPrime: int[] = new Array((10000<<i)+31>>5);
         sum += primes(isPrime, i);
+        retVal += isPrime[i];
     }
     return sum;
 }

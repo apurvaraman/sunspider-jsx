@@ -26,10 +26,10 @@ function AtAu(u: double[],v: double[],n: int): int {
   return 1;
 }
 
-export function main(): double {
-    let sum: double = 0;
+export function main(): int {
+    let sum: int = 0;
     for (let i: int = 6; i <= 48; i *= 2) {
-     sum = sum + spectralnorm(i);
+     sum = sum + (spectralnorm(i) as int);
     }
     return sum;
 }
