@@ -2,10 +2,6 @@
    http://shootout.alioth.debian.org/
    contributed by Isaac Gouy */
 
-int main() {
-    return fannkuch(10);
-}
-
 int fannkuch(int n) {
     int check = 0;
     int perm[n];
@@ -73,4 +69,10 @@ int fannkuch(int n) {
         }
     }
 } 
+
+
+int main() {
+    return fannkuch(10);
+}
+
 
