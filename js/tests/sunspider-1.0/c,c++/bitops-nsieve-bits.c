@@ -25,5 +25,5 @@ int main() {
         sum += primes(isPrime, i);
         retVal += isPrime[i];
     }
-    return sum; // changed what main returns in both c and ts
+    return sum; // changed what main returns in both c and ts. returns 15000 something
 }

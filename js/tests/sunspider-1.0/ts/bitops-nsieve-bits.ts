@@ -28,5 +28,5 @@ export function main(): int {
         sum += primes(isPrime, i);
         retVal += isPrime[i];
     }
-    return sum;
+    return sum; // returns 13000 something
 }

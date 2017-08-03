@@ -52,6 +52,6 @@ int main(){
     for (i = 6; i <= 48; i *= 2) {
      sum = sum + spectralnorm(i);
     }
-    return sum;
+    return sum; //returns 0;
 }
 

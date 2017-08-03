@@ -31,7 +31,7 @@ export function main(): int {
     for (let i: int = 6; i <= 48; i *= 2) {
      sum = sum + (spectralnorm(i) as int);
     }
-    return sum;
+    return sum; //returns 0;
 }
 
 function spectralnorm(n: int) : double{
