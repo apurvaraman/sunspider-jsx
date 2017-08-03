@@ -4,14 +4,14 @@ function nsieve(m: int, isPrime: int[]): int{
    let count: int;
 
    for (i=2; i<=m; i++) { 
-       isPrime[i] = true;
+       isPrime[i] = 1; //changed from boolean to int
    }
    count = 0;
 
    for (i=2; i<=m; i++){
       if (isPrime[i]) {
          for (k=i+i; k<=m; k+=i){
-            isPrime[k] = false;
+            isPrime[k] = 0;
          } 
          count++;
       }

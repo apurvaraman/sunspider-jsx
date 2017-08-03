@@ -3,7 +3,10 @@
    contributed by Isaac Gouy */
 
 int main() {
-    int n = 8;
+    return fannkuch(10);
+}
+
+int fannkuch(int n) {
     int check = 0;
     int perm[n];
     int perm1[n];
@@ -20,15 +23,10 @@ int main() {
 
     while (1) {
 
-        // SKIPPED: writing the permutations
-        // write-out the first 30 permutations
-        // if (check < 30){
-        //     var s = "";
-        //     for(var i=0; i<n; i++) s += (perm1[i]+1).toString();
-        //     check++;
-        // }
-
-        while (r != 1) { count[r - 1] = r; r--; }
+        while (r != 1) {
+             count[r - 1] = r;
+             r--;
+        }
         if (!(perm1[0] == 0 || perm1[m] == m)) {
             int i;
             for (i = 0; i < n; i++) {
@@ -74,5 +72,5 @@ int main() {
             r++;
         }
     }
-}
+} 
 
