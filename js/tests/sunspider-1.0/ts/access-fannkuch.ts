@@ -71,6 +71,6 @@ function fannkuch(n: int): int {
 }
 
 export function main(): int{
-    return fannkuch(10); //CHANGED THIS CAUSE 8 WAS TOO FAST
+    return fannkuch(10); //CHANGED THIS CAUSE 8 WAS TOO FAST // returns 38
 }
 

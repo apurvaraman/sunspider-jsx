@@ -23,9 +23,9 @@ int main() {
     int i;
     int sum = 0;
     for (i = 1; i <= 3; i++ ) {
-        int m = (1<<i)*1000; //CHANGED FROM 100 TO 1000
+        int m = (1<<i)*100; //CHANGED FROM 100 TO 1000
         int flags [m + 1];
         sum += nsieve(m, flags); // changed return value of main        
     }
-    return sum;
+    return sum; //returns 1860
 }

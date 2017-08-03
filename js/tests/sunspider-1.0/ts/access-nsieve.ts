@@ -22,10 +22,10 @@ function nsieve(m: int, isPrime: int[]): int{
 export function main(): int {
     let sum: int = 0;
     for (let i: int = 1; i <= 3; i++ ) {
-        let m: int = (1<<i)*1000;
+        let m: int = (1<<i)*100;
         let flags: int[] = new Array(m+1);
         sum = sum + nsieve(m, flags);
     }
-    return sum;
+    return sum; //returns 263
 }
 

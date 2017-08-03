@@ -72,7 +72,7 @@ int fannkuch(int n) {
 
 
 int main() {
-    return fannkuch(10);
+    return fannkuch(10); //returns 38
 }
 
 
