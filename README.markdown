@@ -1,20 +1,6 @@
-sunspider 1.0 Benchmark for JSX
-===============================
+Variation of the sunspider 1.0 Benchmark in JavaScript, TypeScript (with [AssemblyScript](https://github.com/dcodeIO/AssemblyScript) types), and C compiled to wasm. Compilation done with [AssemblyScript](https://github.com/dcodeIO/AssemblyScript) and [Emscripten](https://github.com/kripken/emscripten) + [binaryen](https://github.com/WebAssembly/binaryen). 
 
-You could see original(Javascript) version at http://www.webkit.org/perf/sunspider/sunspider.html
+Original JSX version at https://github.com/mzp/sunspider-jsx
+Original JS version at http://www.webkit.org/perf/sunspider/sunspider.html
 
-Benchmark
----------
-
- * JSX version http://proofcafe.org/jsx-bench/jsx/sunspider.html
- * Javascirpt version(original) http://proofcafe.org/jsx-bench/js/sunspider.html 
-
-Compile
----------
-
-    $ cd jsx
-    $ JSX=/path/to/bin/jsx bash ./compile-jsx
-    $ ./make-hosted
-
-and open jsx/hosted/sunspider.html by your favorite browser.
 

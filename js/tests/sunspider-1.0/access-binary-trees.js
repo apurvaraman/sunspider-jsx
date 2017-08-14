@@ -30,7 +30,13 @@ var ret;
 
 for ( var n = 4; n <= 7; n += 1 ) {
     var minDepth = 4;
-    var maxDepth = Math.max(minDepth + 2, n);
+    var maxDepth;
+    if ((minDepth + 2) > n){
+        maxDepth = minDepth + 2;
+    }
+    else{
+        maxDepth = n;
+    }
     var stretchDepth = maxDepth + 1;
     
     var check = bottomUpTree(0,stretchDepth).itemCheck();
